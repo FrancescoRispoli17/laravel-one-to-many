@@ -40,11 +40,33 @@
                                 <td class="px-0"><a type="button" class="btn btn-light" href="{{route('admin.projects.show', $project)}}">Detail</a></td>
                                 <td class="px-0"><a type="button" class="btn btn-primary" href="{{route('admin.projects.edit', $project)}}">Update</a></td>
                                 <td class="px-0">
-                                    <form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Cancella</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Sicuro di voler procedere?</h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              Non sarà più possibile recuperare il record
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                              <form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Cancella</button>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    {{-- <form action="{{route('admin.projects.destroy', $project)}}" method="POST">
                                         @csrf   
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach

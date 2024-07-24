@@ -19,6 +19,22 @@
                         @endif
                     </div>
                     <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Type</label>
+                        <select class="form-select  @if ($errors->get('type_id')) is-invalid @endif" aria-label="Default select example" name="type_id">
+                            <option value="0" selected disabled></option>
+                            @foreach ( $types as $type )
+                            <option value="{{ $type->id }}" @if (old('type_id') == $type->id) selected @endif>{{ $type->name }}</option>
+                            @endforeach
+                          </select>
+                          @if ($errors->get('type_id'))
+                            <div class="invalid-feedback">
+                                @foreach ($errors->get('type_id') as $error )
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Cration date</label>
                         <input type="date" class="form-control @if ($errors->get('creation_date')) is-invalid @endif" id="exampleFormControlInput1" name="creation_date" value="{{ old('creation_date') }}">
                         @if ($errors->get('creation_date'))

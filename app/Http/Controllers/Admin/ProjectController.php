@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Type;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -24,7 +25,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create',compact('types'));
     }
 
     /**
@@ -40,6 +42,7 @@ class ProjectController extends Controller
         $project->slug = $data['slug'];
         $project->creation_date = $data['creation_date'];
         $project->size = $data['size'];
+        $project->type_id = $data['type_id'];
 
         $project->save();
         return redirect()->route('admin.projects.index')->with('message','creation done successfully');
